@@ -1,19 +1,15 @@
-# Base Image
-FROM python:3.11-slim
+FROM python:3.8
 
-# Arbeitsverzeichnis setzen
+RUN apt-get update && apt-get install -y netcat-traditional && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
-# Abhängigkeiten installieren
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Code kopieren
 COPY . .
 
-# Port exposen
 EXPOSE 8020
 
-# Entrypoint
 RUN chmod +x entrypoint.sh
-CMD ["./entrypoint.sh"]
+ENTRYPOINT ["./entrypoint.sh"]
