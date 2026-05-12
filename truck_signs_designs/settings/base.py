@@ -24,7 +24,8 @@ TEMPLATES_DIR = os.path.join(ROOT_BASE_DIR,'templates')
 
 
 
-ALLOWED_HOSTS = ['0.0.0.0', 'localhost', '127.0.0.1', '46.224.26.224',]
+import os
+ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', 'localhost').split(',')
 
 
 # Application definition
