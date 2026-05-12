@@ -3,12 +3,17 @@
 ## Table of Contents
 - [Description](#description)
 - [Quickstart](#quickstart)
-- [How to Build the Image](#how-to-build-the-image)
+  - [Requirements](#requirements)
+  - [Clone the Repository](#clone-the-repository)
+  - [Create Environment File](#create-environment-file)
+  - [How to Build the Image](#how-to-build-the-image)
+  - [Start the Database](#start-the-database)
+  - [Start the API](#start-the-api)
 - [Usage](#usage)
 
 ## Description
 Truck Signs API is a Django REST API for managing truck sign designs.
-It uses a PostgreSQL database and runs on port 8020.
+It uses a PostgreSQL database running in a separate container and is accessible on port 8020.
 
 ## Quickstart
 
@@ -21,12 +26,16 @@ git clone git@github.com:thkbprbxyg-maker/truck_signs_api.git
 cd truck_signs_api
 ```
 
+### Create Environment File
+```bash
+cp .env.example .env
+```
+Edit the `.env` file and fill in your values.
+
 ### How to Build the Image
 ```bash
 docker build -t truck_signs_api .
 ```
-
-## Usage
 
 ### Create the Network
 ```bash
@@ -57,24 +66,10 @@ docker run -d \
   truck_signs_api
 ```
 
-### Environment Variables
-Create a `.env` file with the following variables:
+## Usage
+The API is accessible at `http://<your-ip>:8020`
 
-```
-DOCKER_SECRET_KEY=your-secret-key
-DOCKER_DB_NAME=truck_signs
-DOCKER_DB_USER=postgres
-DOCKER_DB_PASSWORD=your-password
-DOCKER_DB_HOST=db
-DOCKER_DB_PORT=5432
-POSTGRES_DB=truck_signs
-POSTGRES_USER=postgres
-POSTGRES_PASSWORD=your-password
-DOCKER_STRIPE_PUBLISHABLE_KEY=your-stripe-key
-DOCKER_STRIPE_SECRET_KEY=your-stripe-secret
-DOCKER_CLOUD_NAME=your-cloud-name
-DOCKER_API_KEY=your-api-key
-DOCKER_API_SECRET=your-api-secret
-DOCKER_EMAIL_HOST_USER=your-email
-DOCKER_EMAIL_HOST_PASSWORD=your-email-password
-```
+Available endpoints:
+- `/truck-signs/products/`
+- `/truck-signs/categories/`
+- `/admin/`
