@@ -7,9 +7,10 @@
   - [Clone the Repository](#clone-the-repository)
   - [Create Environment File](#create-environment-file)
   - [How to Build the Image](#how-to-build-the-image)
+  - [Create the Network](#create-the-network)
   - [Start the Database](#start-the-database)
   - [Start the API](#start-the-api)
-- [Usage](#usage)
+  - [Usage](#usage)
 
 ## Description
 Truck Signs API is a Django REST API for managing truck sign designs.
@@ -48,9 +49,7 @@ docker run -d \
   --name db \
   --network truck_signs_network \
   --restart always \
-  -e POSTGRES_DB=${POSTGRES_DB} \
-  -e POSTGRES_USER=${POSTGRES_USER} \
-  -e POSTGRES_PASSWORD=${POSTGRES_PASSWORD} \
+  --env-file .env \
   -v truck_signs_data:/var/lib/postgresql/data \
   postgres:15
 ```
@@ -66,7 +65,7 @@ docker run -d \
   truck_signs_api
 ```
 
-## Usage
+### Usage
 The API is accessible at `http://<your-ip>:8020`
 
 Available endpoints:
